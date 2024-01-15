@@ -1,0 +1,8 @@
+services:
+  squid:
+    build: "."
+    restart: "unless-stopped"
+    ports:
+      - "3128:3128"
+    volumes:
+      - "./squid.conf:/usr/local/squid/etc/squid.conf:ro,z"
