@@ -52,7 +52,7 @@ RUN mkdir -p var/lib/squid && \
 RUN dnf -y install epel-release
 RUN dnf -y install upx
 RUN shopt -s dotglob && shopt -s nullglob && shopt -s globstar && \
-    { upx --best --lzma {bin,sbin,libexec}/**/* || :; }
+    { upx --lzma {bin,sbin,libexec}/**/* || :; }
 
 RUN rm -fr share/man/
 RUN chown -R nobody:nobody var/
@@ -88,7 +88,7 @@ RUN for x in /chroot/usr/local/bin/*; do rm -fv "${x/local\//}" && ln -s "${x/ch
 RUN dnf -y install epel-release
 RUN dnf -y install upx
 RUN shopt -s dotglob && shopt -s nullglob && shopt -s globstar && \
-    { upx --best --lzma /chroot/usr/{,local/}{bin,sbin,libexec}/**/* || :; }
+    { upx --lzma /chroot/usr/{,local/}{bin,sbin,libexec}/**/* || :; }
 
 RUN dnf -y install xz
 RUN cd /chroot/usr/share && XZ_OPT=-9 tar Jcf licenses.tar.xz licenses && rm -fr licenses/
