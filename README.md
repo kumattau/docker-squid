@@ -45,7 +45,17 @@ Server: GitHub.com
 ...
 ```
 
-As default, ssl-bump uses a self-signed certificate in `/usr/local/squid/var/lib/squid/ssl-bump.pem` generated at build time.
+As default, ssl-bump uses the following self-signed certificate files generated at build time:
+
+* `/usr/local/squid/var/lib/squid/ssl-bump.key`
+* `/usr/local/squid/var/lib/squid/ssl-bump.crt`
+* `/usr/local/squid/var/lib/squid/ssl-bump.pem` (this is concatenation of `ssl-bump.key` and `ssl-bump.crt`)
+
+You can get the self-signed certificate file as follows:
+
+```
+$ docker compose exec -ti squid cat /usr/local/squid/var/lib/squid/ssl-bump.crt
+```
 
 See [docker-compose.yml](docker-compose.yml), [squid.conf](squid.conf) and [Dockerfile](Dockerfile) for more details.
 
